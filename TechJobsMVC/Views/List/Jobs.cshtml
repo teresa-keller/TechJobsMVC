@@ -5,6 +5,19 @@
     @{
         //TODO #1: Use a loop to display job results in a table.
     }
+<table>
+    @foreach (var job in ViewBag.jobs)
+    {
+        <tr>Id: @job.Id</tr><br />
+        <tr>Name: @job.Name</tr><br />
+        <tr>Employer: @job.Employer</tr><br />
+        <tr>Location: @job.Location</tr><br />
+        <tr>Position type: @job.PositionType</tr><br />
+        <tr>Core competency: @job.CoreCompetency</tr><br />
+        <br />
+    }
+
+</table>
 
 
 </div>

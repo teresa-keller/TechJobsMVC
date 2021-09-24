@@ -26,8 +26,25 @@
 
     <hr />
 
-    @{
-        //TODO #4: Loop over the search results to display all job fields.
-    }
-
+    <table>
+        <tr>
+            @foreach (var job in ViewBag.tableChoices)
+            {
+                //@if (@job.Value == "null")
+                {
+            <td>
+                <ul>
+                    @foreach (var item in job.Value)
+                    {
+                        <li>
+                            @job
+                        </li>
+                    }
+                </ul>
+            </td>
+                }
+            }
+        </tr>
+    </table>
+   
 </div>

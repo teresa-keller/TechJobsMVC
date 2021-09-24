@@ -34,12 +34,13 @@
                 {
             <td>
                 <ul>
-                    @foreach (var item in job.Value)
-                    {
-                        <li>
-                            @job
-                        </li>
-                    }
+                   
+                    
+                    <li>
+                        <a asp-controller="Search" asp-action="Results" asp-route-column="@job.Key" asp-route-value="@job">View All</a>
+
+                    </li>
+                    
                 </ul>
             </td>
                 }

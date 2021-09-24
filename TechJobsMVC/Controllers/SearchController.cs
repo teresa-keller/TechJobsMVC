@@ -27,12 +27,14 @@ namespace TechJobsMVC.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+            List<Job> jobs;
             ViewBag.columns = ColumnChoices;
             ViewBag.tableChoices = TableChoices;
             ViewBag.employers = JobData.GetAllEmployers();
             ViewBag.locations = JobData.GetAllLocations();
             ViewBag.positionTypes = JobData.GetAllPositionTypes();
             ViewBag.skills = JobData.GetAllCoreCompetencies();
+            jobs = JobData.FindAll();
             return View();
         }
 
@@ -40,19 +42,20 @@ namespace TechJobsMVC.Controllers
         {
             
             List<Job> jobs;
-            if(!searchTerm.ToLower().Equals(""))
+            if (searchTerm == null)
+            {
+                jobs = JobData.FindAll();
+                ViewBag.title = "All jobs";
+                
+            }
+            else
             {
                 jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
                 ViewBag.title = "Jobs with " + ViewBag.columns[searchType] + ": " + searchTerm;
             }
-            else
-            {
-                jobs = JobData.FindAll();
-                ViewBag.title = "All jobs";
-            }
             ViewBag.jobs = jobs;
 
-            return View();
+            return View("Index");
         }
 
     }

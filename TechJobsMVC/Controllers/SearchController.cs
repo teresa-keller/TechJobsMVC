@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+<<<<<<< HEAD
+=======
+using System;
+>>>>>>> seearch-start-over
 using System.Collections.Generic;
 using TechJobsMVC.Data;
 using TechJobsMVC.Models;
@@ -9,6 +13,7 @@ namespace TechJobsMVC.Controllers
 {
     public class SearchController : Controller
     {
+<<<<<<< HEAD
         internal static Dictionary<string, string> ColumnChoices = new Dictionary<string, string>()
         {
             {"all", "All"},
@@ -46,11 +51,52 @@ namespace TechJobsMVC.Controllers
             {
                 jobs = JobData.FindAll();
                 ViewBag.title = "All jobs";
+=======
+        
+        // GET: /<controller>/
+        public IActionResult Index()
+        {
+            ViewBag.columns = ListController.ColumnChoices;
+            //ViewBag.tableChoices = ListController.TableChoices;
+            return View();
+        }
+
+        [HttpPost]
+        // TODO #3: Create an action method to process a search request and render the updated search view. 
+        public IActionResult Results(string searchType, string searchTerm)
+        {
+            ViewBag.columns = ListController.ColumnChoices;
+            ViewBag.tableChoices = ListController.TableChoices;
+            List<Job> jobs = new List<Job>();
+
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                jobs = JobData.FindAll();
+            }
+            else 
+            {
+                jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
+            }
+
+            ViewBag.Title = "Jobs";
+            ViewBag.jobs = jobs;
+            
+            return View("Index");
+        }
+       
+        /*public IActionResult Results(string searchType, string searchTerm = "all")
+        {
+            List<Job> jobs = new List<Job>();
+            if (searchTerm.ToLower().Equals("all"))
+            {
+                jobs = JobData.FindAll();
+>>>>>>> seearch-start-over
                 
             }
             else
             {
                 jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
+<<<<<<< HEAD
                 ViewBag.title = "Jobs with " + ViewBag.columns[searchType] + ": " + searchTerm;
             }
             ViewBag.jobs = jobs;
@@ -58,5 +104,13 @@ namespace TechJobsMVC.Controllers
             return View("Index");
         }
 
+=======
+                ViewBag.title = "Jobs with " + ColumnChoices[searchType] + ": " + searchTerm;
+            }
+            ViewBag.jobs = jobs;
+
+            return View();
+        }*/
+>>>>>>> seearch-start-over
     }
 }

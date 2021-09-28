@@ -1,0 +1,93 @@
+﻿<div class="container body-content">
+
+    <h1>@ViewBag.title</h1>
+
+    <form action="/search/results" method="post">
+        <h2>Search by:</h2>
+
+        <p>
+            @foreach (var column in ViewBag.columns)
+            {
+                <span>
+                    <input type="radio" name="searchType" id="@column.Key" value="@column.Key" checked="@column.Key == 'all'" />
+                    <label for="@column.Key">@column.Value</label>
+                </span>
+            }
+
+        </p>
+
+        <p>
+            <label for="searchTerm">Keyword:</label>
+            <input type="text" name="searchTerm" id="searchTerm" />
+        </p>
+
+        <input type="submit" value="Search" />
+    </form>
+
+    <hr />
+
+    @{
+//TODO #4: Loop over the search results to display all job fields.
+    }
+    <div>
+        <table class="centeredTable">
+            <tr>
+
+
+                @if (ViewBag.jobs.Count == 0)
+                {
+                    @foreach (var job in ViewBag.columns)
+                    {
+                        @if (@job.Key == "all")
+                        {
+                            <td>
+                                <ul>
+                                    <li>
+                                        <a asp-controller="List" asp-action="Jobs" asp-route-column="@job.Key" asp-route-value="@job">View All</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        }
+
+                    }
+                }
+                else
+                {
+                    @foreach (var job in ViewBag.jobs)
+                    {
+                        @if (@job.Value == ViewBag.searchTerm)
+                        {
+                            <td>
+                                <ul>
+                                    <li>
+                                        <a asp-controller="Search" asp-action="Results" asp-route-column="@job.searchType" asp-route-value="@job.searchTerm">@job</a>
+
+                                    </li>
+                                </ul>
+                            </td>
+                        }
+
+
+                    }
+                    }
+
+
+                }
+
+            @* Feel free to remove or modify this element if necessary. *@
+                @foreach (var category in ViewBag.columns)
+                {
+                    <td>
+                        <ul>
+
+
+                            <li>
+                                <a asp-controller="Search" asp-action="Results" asp-route-column="@category.Key" asp-route-value="@category">@category</a>
+                            </li>
+
+                        </ul>
+                    </td>
+                }
+            </tr>
+        </table>
+    </div>

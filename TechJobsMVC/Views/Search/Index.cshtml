@@ -25,6 +25,7 @@
     </form>
 
     <hr />
+<<<<<<< HEAD
 
     <table>
         <tr>
@@ -48,4 +49,28 @@
         </tr>
     </table>
    
+=======
+    @if (ViewBag.jobs != null)
+            {
+<table>
+    @foreach (var job in ViewBag.jobs)
+    {
+        <tr>
+            <td>
+                <ul>
+                    <li>Id: @job.Id</li>
+                    <li>Name: @job.Name</li>
+                    <li>Employer: @job.Employer</li>
+                    <li>Location: @job.Location</li>
+                    <li>Position Type: @job.PositionType</li>
+                    <li>Skill: @job.CoreCompetency</li>
+                </ul>
+            </td>
+        </tr>
+    }
+
+</table>
+            }
+
+>>>>>>> seearch-start-over
 </div>
